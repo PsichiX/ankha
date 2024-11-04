@@ -1,0 +1,9 @@
+mod test {
+    pub fn factorial(n: i32) -> {
+        if n == 0_i32 {
+            1_i32
+        } else {
+            n * factorial(n - 1_i32)
+        }
+    }
+}

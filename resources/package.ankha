@@ -1,0 +1,91 @@
+(file
+    (mod "test"
+        (struct "Bar"
+            (field "a" (kind owned))
+            (field "b" (kind box))
+        )
+        (fn "make"
+            (out "result" (kind box))
+            (body
+                (group_reversed
+                    (structure (type "Bar") "a" "b")
+                    (ensure_stack_type (type "i32"))
+                    (lit i32 40)
+                    (ensure_stack_type (type "i32"))
+                    (box)
+                    (ensure_stack_type (type "i32"))
+                    (lit i32 2)
+                )
+                (ensure_stack_type (type "Bar"))
+            )
+        )
+        (fn "main"
+            (out "result" (kind owned))
+            (body
+                (group_reversed
+                    (call_function (fn "add" "intrinsics"))
+                    (ensure_stack_type (type "i32"))
+                    (lit i32 40)
+                    (ensure_stack_type (type "i32"))
+                    (lit i32 2)
+                )
+                (ensure_stack_type (type "i32"))
+            )
+        )
+        (fn "main2"
+            (out "result" (kind owned))
+            (body
+                (make_register (kind owned) "bar")
+                (group
+                    (call_function (fn "make"))
+                    (pop_to_register "bar")
+                    (ensure_register_type (type "Bar") "bar")
+                )
+                (group_reversed
+                    (call_function (fn "add" "intrinsics"))
+                    (lit i32 2)
+                    (group
+                        (push_from_register "bar")
+                        (borrow)
+                        (pop_to_register "bar")
+                        (borrow_field "a" (kind owned))
+                        (copy_from)
+                    )
+                )
+                (group
+                    (push_from_register "bar")
+                    (borrow_mut)
+                    (pop_to_register "bar")
+                    (borrow_mut_field "a" (kind owned))
+                    (swap)
+                    (move_into)
+                )
+                (push_from_register "bar")
+            )
+        )
+        (fn "factorial"
+            (in "n" (kind owned))
+            (out "result" (kind owned))
+            (body
+                (copy)
+                (lit i32 0)
+                (call_function (fn "eq" "intrinsics"))
+                (stack_unwrap_boolean)
+                (branch
+                    (success
+                        (stack_drop)
+                        (lit i32 1)
+                    )
+                    (failure
+                        (copy)
+                        (lit i32 1)
+                        (swap)
+                        (call_function (fn "sub" "intrinsics"))
+                        (call_function (fn "factorial"))
+                        (call_function (fn "mul" "intrinsics"))
+                    )
+                )
+            )
+        )
+    )
+)

@@ -1,0 +1,22 @@
+[package]
+name = "ankha"
+version = "0.1.0"
+edition = "2021"
+authors = ["Patryk 'PsichiX' Budzynski <psichix@gmail.com>"]
+description = "Ankha scripting toolset"
+license = "MIT OR Apache-2.0"
+homepage = "https://github.com/PsichiX/Ankha"
+repository = "https://github.com/PsichiX/Ankha"
+documentation = "https://docs.rs/ankha"
+readme = "../../README.md"
+
+[dependencies]
+intuicio-data = "0.38"
+intuicio-core = "0.38"
+intuicio-parser = "0.38"
+intuicio-backend-vm = "0.38"
+serde = { version = "1", features = ["derive", "rc"] }
+
+[dev-dependencies]
+intuicio-derive = "0.38"
+serde-lexpr = "0.1"
