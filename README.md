@@ -1,2 +1,2 @@
-# ankha
-Managed memory scripting toolset
+# Ankha
+Extendable scripting language with managed memory model
