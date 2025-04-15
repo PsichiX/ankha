@@ -1,0 +1,13 @@
+[package]
+name = "calcite"
+version = "0.2.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+ankha = { version = "0.2", path = "../../crates/ankha" }
+intuicio-data = "0.45"
+intuicio-core = "0.45"
+intuicio-derive = "0.45"
+intuicio-parser = "0.45"
+intuicio-backend-vm = "0.45"

@@ -1,0 +1,40 @@
+mod test {
+    pub struct Player { pub id, x, y }
+
+    impl Player {
+        pub fn new(id, x, y) -> {
+            Player { id, x, y }
+        }
+
+        pub fn move(self: refmut, dx, dy) {
+            self.x += dx;
+            self.y += dy;
+        }
+
+        pub fn format(self: ref, fmt: refmut Formatter) {
+            ref "Player: ".format(fmt);
+            self.id.format(fmt);
+            ref " | x: ".format(fmt);
+            self.x.format(fmt);
+            ref " | y: ".format(fmt);
+            self.y.format(fmt);
+        }
+    }
+
+    pub fn main() {
+        let player = Player::new("P1", 0_f32, 0_f32);
+        for step in range_in_ex(0, 10) {
+            print_nl(ref format("#{}: {}", [ref step, ref player]));
+            player.move(copy step * 2_f32, step);
+        }
+        print_nl(ref format("final: {}", [ref player]));
+    }
+
+    pub fn factorial(n) -> {
+        if n == 0_i32 {
+            1_i32
+        } else {
+            n * factorial(n - 1_i32)
+        }
+    }
+}

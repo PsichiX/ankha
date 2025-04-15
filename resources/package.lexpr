@@ -1,0 +1,82 @@
+((modules (
+    (name . "test")
+    (structs (
+        (name . "Bar")
+        (fields (
+            (name . "a")
+            (kind . Owned)
+        ) (
+            (name . "b")
+            (kind . Box)
+        ))
+    ))
+    (functions (
+        (name . "make")
+        (outputs (
+            (name . "result")
+            (kind . Owned)
+        ))
+        (script
+            (GroupReversed
+                (Expression Structure (type_query (name "Bar")) (fields "a" "b"))
+                (Expression EnsureStackType (type_query (name "i32")))
+                (Expression Literal I32 . 40)
+                (Expression EnsureStackType (type_query (name "i32")))
+                (Expression Box)
+                (Expression EnsureStackType (type_query (name "i32")))
+                (Expression Literal I32 . 2)
+            )
+            (Expression EnsureStackType (type_query (name "Bar")))
+        )
+    ) (
+        (name . "main")
+        (outputs (
+            (name . "result")
+            (kind . Owned)
+        ))
+        (script
+            (GroupReversed
+                (CallFunction (name "add") (module_name "intrinsics"))
+                (Expression EnsureStackType (type_query (name "i32")))
+                (Expression Literal I32 . 2)
+                (Expression EnsureStackType (type_query (name "i32")))
+                (Expression Literal I32 . 40)
+            )
+            (Expression EnsureStackType (type_query (name "i32")))
+        )
+    ) (
+        (name . "main2")
+        (outputs (
+            (name . "result")
+            (kind . Owned)
+        ))
+        (script
+            (MakeRegister (kind . Owned) (name "bar"))
+            (Group
+                (CallFunction (name "make"))
+                (PopToRegister Name . "bar")
+                (EnsureRegisterType (type_query (name "Bar")) (address Name . "bar"))
+            )
+            (GroupReversed
+                (CallFunction (name "add") (module_name "intrinsics"))
+                (Expression Literal I32 . 2)
+                (Group
+                    (PushFromRegister Name . "bar")
+                    (Expression Borrow)
+                    (PopToRegister Name . "bar")
+                    (Expression BorrowField (name . "a") (kind . Owned))
+                    (Expression CopyFrom)
+                )
+            )
+            (Group
+                (PushFromRegister Name . "bar")
+                (Expression BorrowMut)
+                (PopToRegister Name . "bar")
+                (Expression BorrowMutField (name . "a") (kind . Owned))
+                (Expression Swap)
+                (Expression MoveInto)
+            )
+            (PushFromRegister Name . "bar")
+        )
+    ))
+)))

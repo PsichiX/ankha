@@ -1,0 +1,11 @@
+[package]
+name = "ankha-auri"
+version = "0.2.0"
+edition = "2024"
+authors = ["Patryk 'PsichiX' Budzynski <psichix@gmail.com>"]
+description = "Auri dialect for Ankha scripting toolset"
+license = "MIT OR Apache-2.0"
+homepage = "https://github.com/PsichiX/Ankha"
+repository = "https://github.com/PsichiX/Ankha"
+documentation = "https://docs.rs/ankha-auri"
+readme = "../../README.md"
