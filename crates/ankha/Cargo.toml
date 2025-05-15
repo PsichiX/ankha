@@ -12,11 +12,11 @@ readme = "../../README.md"
 
 [dependencies]
 typid = "1"
-intuicio-data = "0.45"
-intuicio-core = "0.45"
-intuicio-derive = "0.45"
-intuicio-parser = "0.45"
-intuicio-backend-vm = "0.45"
+intuicio-data = "0.46"
+intuicio-core = "0.46"
+intuicio-derive = "0.46"
+intuicio-parser = "0.46"
+intuicio-backend-vm = "0.46"
 serde = { version = "1", features = ["derive", "rc"] }
 
 [dev-dependencies]

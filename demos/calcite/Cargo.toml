@@ -6,8 +6,8 @@ publish = false
 
 [dependencies]
 ankha = { version = "0.2", path = "../../crates/ankha" }
-intuicio-data = "0.45"
-intuicio-core = "0.45"
-intuicio-derive = "0.45"
-intuicio-parser = "0.45"
-intuicio-backend-vm = "0.45"
+intuicio-data = "0.46"
+intuicio-core = "0.46"
+intuicio-derive = "0.46"
+intuicio-parser = "0.46"
+intuicio-backend-vm = "0.46"
